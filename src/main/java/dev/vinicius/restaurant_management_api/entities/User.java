@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -34,7 +35,7 @@ public abstract class User {
     private String password;
 
     @Column(name = "created_date", nullable = false)
-    private LocalDateTime modifiedDate;
+    private Date modifiedDate;
 
     @Column(name = "address", nullable = false)
     private String address;
