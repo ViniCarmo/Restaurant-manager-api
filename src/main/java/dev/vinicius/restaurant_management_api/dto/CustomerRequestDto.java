@@ -8,10 +8,10 @@ public record CustomerRequestDto(
         String name,
         @NotBlank(message = "Email is required")
         @Email(message = "Email should be valid")
-        String Email,
+        String email,
 
         @NotBlank(message = "Login is required")
-        String Login,
+        String login,
 
         @NotBlank(message = "Password is required")
         String password,
