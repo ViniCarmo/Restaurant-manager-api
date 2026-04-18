@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDateTime;
 import java.util.Date;
@@ -34,8 +35,9 @@ public abstract class User {
     @Column(name = "password", nullable = false)
     private String password;
 
-    @Column(name = "created_date", nullable = false)
-    private Date modifiedDate;
+    @Column(name = "modifiend_date", nullable = false)
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private LocalDateTime modifiedDate;
 
     @Column(name = "address", nullable = false)
     private String address;
