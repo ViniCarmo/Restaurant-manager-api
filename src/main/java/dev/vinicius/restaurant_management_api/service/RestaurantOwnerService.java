@@ -30,6 +30,10 @@ public class RestaurantOwnerService {
 
         restaurantOwnerRepository.save(restaurantOwner);
     }
-
+    private void deleteRestaurantOwnerById(Integer id) {
+        RestaurantOwner restaurantOwner = restaurantOwnerRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Restaurant owner not found"));
+        restaurantOwnerRepository.deleteById(id);
+    }
 
 }
