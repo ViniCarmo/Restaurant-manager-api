@@ -34,7 +34,7 @@ public abstract class User {
     @Column(name = "password", nullable = false)
     private String password;
 
-    @Column(name = "modifiend_date", nullable = false)
+    @Column(name = "modified_date", nullable = false)
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime modifiedDate;
 
