@@ -19,7 +19,7 @@ public class RestaurantOwnerService {
         this.restaurantOwnerRepository = restaurantOwnerRepository;
     }
 
-    private void createRestaurantOwner(RestaurantOwnerRequestDto restaurantOwnerRequestDto) {
+    public void createRestaurantOwner(RestaurantOwnerRequestDto restaurantOwnerRequestDto) {
         RestaurantOwner restaurantOwner = new RestaurantOwner(
                 null,
                 restaurantOwnerRequestDto.name(),
@@ -34,13 +34,13 @@ public class RestaurantOwnerService {
         restaurantOwnerRepository.save(restaurantOwner);
     }
 
-    private void deleteRestaurantOwnerById(Integer id) {
+    public void deleteRestaurantOwnerById(Integer id) {
         RestaurantOwner restaurantOwner = restaurantOwnerRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Restaurant owner not found"));
         restaurantOwnerRepository.deleteById(id);
     }
 
-    private RestaurantOwnerResponseDto getRestaurantOwnerById(Integer id) {
+    public RestaurantOwnerResponseDto getRestaurantOwnerById(Integer id) {
         RestaurantOwner restaurantOwner = restaurantOwnerRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Restaurant owner not found"));
         return new RestaurantOwnerResponseDto(
