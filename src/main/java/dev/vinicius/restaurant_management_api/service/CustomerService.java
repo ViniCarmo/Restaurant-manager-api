@@ -74,7 +74,6 @@ public class CustomerService {
         );
     }
 
-
     public void updatePassword(Integer id, UpdatePasswordRequestDto dto) {
         Customer customer = customerRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Customer not found"));

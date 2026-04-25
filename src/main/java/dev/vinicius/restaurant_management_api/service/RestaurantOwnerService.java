@@ -2,6 +2,7 @@ package dev.vinicius.restaurant_management_api.service;
 
 import dev.vinicius.restaurant_management_api.dto.RestaurantOwnerRequestDto;
 import dev.vinicius.restaurant_management_api.dto.RestaurantOwnerResponseDto;
+import dev.vinicius.restaurant_management_api.dto.UpdatePasswordRequestDto;
 import dev.vinicius.restaurant_management_api.entities.RestaurantOwner;
 import dev.vinicius.restaurant_management_api.repository.RestaurantOwnerRepository;
 import org.springframework.stereotype.Service;
@@ -32,6 +33,7 @@ public class RestaurantOwnerService {
 
         restaurantOwnerRepository.save(restaurantOwner);
     }
+
     private void deleteRestaurantOwnerById(Integer id) {
         RestaurantOwner restaurantOwner = restaurantOwnerRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Restaurant owner not found"));
@@ -50,7 +52,8 @@ public class RestaurantOwnerService {
                 restaurantOwner.getRestaurantName()
         );
     }
-    private List<RestaurantOwnerResponseDto> getRestaurantOwnerByName(String name){
+
+    private List<RestaurantOwnerResponseDto> getRestaurantOwnerByName(String name) {
         return restaurantOwnerRepository.getRestaurantOwnerByName(name).stream()
                 .map(restaurantOwner -> new RestaurantOwnerResponseDto(
                         restaurantOwner.getName(),
@@ -60,9 +63,35 @@ public class RestaurantOwnerService {
                         restaurantOwner.getAddress(),
                         restaurantOwner.getRestaurantName()
                 )).toList();
-        }
+    }
 
+    private RestaurantOwnerResponseDto updateRestaurantOwner(Integer id, RestaurantOwnerRequestDto restaurantOwnerRequestDto) {
+        RestaurantOwner restaurantOwner = restaurantOwnerRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Restaurant owner not found"));
 
+        restaurantOwner.setName(restaurantOwnerRequestDto.name());
+        restaurantOwner.setEmail(restaurantOwnerRequestDto.email());
+        restaurantOwner.setLogin(restaurantOwnerRequestDto.login());
+        restaurantOwner.setModifiedDate(LocalDateTime.now());
+        restaurantOwner.setAddress(restaurantOwnerRequestDto.address());
+        restaurantOwner.setRestaurantName(restaurantOwnerRequestDto.restaurantName());
 
+        restaurantOwnerRepository.save(restaurantOwner);
+        return new RestaurantOwnerResponseDto(
+                restaurantOwner.getName(),
+                restaurantOwner.getEmail(),
+                restaurantOwner.getLogin(),
+                restaurantOwner.getModifiedDate(),
+                restaurantOwner.getAddress(),
+                restaurantOwner.getRestaurantName()
+        );
+    }
 
+     public void updatePassword(Integer id, UpdatePasswordRequestDto updatePasswordRequestDto) {
+        RestaurantOwner restaurantOwner = restaurantOwnerRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Restaurant owner not found"));
+        restaurantOwner.setPassword(updatePasswordRequestDto.newPassword());
+        restaurantOwner.setModifiedDate(LocalDateTime.now());
+        restaurantOwnerRepository.save(restaurantOwner);
+    }
 }
