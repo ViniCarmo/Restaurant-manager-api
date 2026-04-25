@@ -53,7 +53,7 @@ public class RestaurantOwnerService {
         );
     }
 
-    private List<RestaurantOwnerResponseDto> getRestaurantOwnerByName(String name) {
+    public List<RestaurantOwnerResponseDto> getRestaurantOwnerByName(String name) {
         return restaurantOwnerRepository.getRestaurantOwnerByName(name).stream()
                 .map(restaurantOwner -> new RestaurantOwnerResponseDto(
                         restaurantOwner.getName(),
@@ -65,7 +65,7 @@ public class RestaurantOwnerService {
                 )).toList();
     }
 
-    private RestaurantOwnerResponseDto updateRestaurantOwner(Integer id, RestaurantOwnerRequestDto restaurantOwnerRequestDto) {
+    public RestaurantOwnerResponseDto updateRestaurantOwner(Integer id, RestaurantOwnerRequestDto restaurantOwnerRequestDto) {
         RestaurantOwner restaurantOwner = restaurantOwnerRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Restaurant owner not found"));
 

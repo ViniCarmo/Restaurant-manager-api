@@ -83,12 +83,12 @@ public class CustomerService {
     }
     public List<CustomerResponseDto> findCustomerByName(String name){
         return customerRepository.findCustomerByName(name).stream().map(customer -> new CustomerResponseDto(
-                customer.name(),
-                customer.email(),
-                customer.login(),
-                customer.modifiedDate(),
-                customer.address(),
-                customer.cpf()
+                customer.getName(),
+                customer.getEmail(),
+                customer.getLogin(),
+                customer.getModifiedDate(),
+                customer.getAddress(),
+                customer.getCpf()
         )).toList();
 
     }

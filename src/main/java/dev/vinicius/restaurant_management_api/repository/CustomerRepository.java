@@ -9,5 +9,5 @@ import java.util.Optional;
 
 public interface CustomerRepository extends JpaRepository<Customer, Integer> {
 
-    List<CustomerResponseDto> findCustomerByName(String name);
+    List<Customer> findCustomerByName(String name);
 }
