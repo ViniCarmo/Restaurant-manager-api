@@ -1,6 +1,7 @@
 package dev.vinicius.restaurant_management_api.service;
 
 import dev.vinicius.restaurant_management_api.dto.RestaurantOwnerRequestDto;
+import dev.vinicius.restaurant_management_api.dto.RestaurantOwnerResponseDto;
 import dev.vinicius.restaurant_management_api.entities.RestaurantOwner;
 import dev.vinicius.restaurant_management_api.repository.RestaurantOwnerRepository;
 import org.springframework.stereotype.Service;
@@ -34,6 +35,21 @@ public class RestaurantOwnerService {
         RestaurantOwner restaurantOwner = restaurantOwnerRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Restaurant owner not found"));
         restaurantOwnerRepository.deleteById(id);
+    }
+
+    private RestaurantOwnerResponseDto getRestaurantOwnerById(Integer id){
+        RestaurantOwner restaurantOwner = restaurantOwnerRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Restaurant owner not found"));
+        return new RestaurantOwnerResponseDto(
+                restaurantOwner.getName(),
+                restaurantOwner.getEmail(),
+                restaurantOwner.getLogin(),
+                restaurantOwner.getModifiedDate(),
+                restaurantOwner.getAddress(),
+                restaurantOwner.getRestaurantName()
+        );
+
+
     }
 
 }
