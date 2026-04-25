@@ -7,6 +7,7 @@ import dev.vinicius.restaurant_management_api.repository.RestaurantOwnerReposito
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 public class RestaurantOwnerService {
@@ -37,7 +38,7 @@ public class RestaurantOwnerService {
         restaurantOwnerRepository.deleteById(id);
     }
 
-    private RestaurantOwnerResponseDto getRestaurantOwnerById(Integer id){
+    private RestaurantOwnerResponseDto getRestaurantOwnerById(Integer id) {
         RestaurantOwner restaurantOwner = restaurantOwnerRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Restaurant owner not found"));
         return new RestaurantOwnerResponseDto(
@@ -48,8 +49,20 @@ public class RestaurantOwnerService {
                 restaurantOwner.getAddress(),
                 restaurantOwner.getRestaurantName()
         );
-
-
     }
+    private List<RestaurantOwnerResponseDto> getRestaurantOwnerByName(String name){
+        return restaurantOwnerRepository.getRestaurantOwnerByName(name).stream()
+                .map(restaurantOwner -> new RestaurantOwnerResponseDto(
+                        restaurantOwner.getName(),
+                        restaurantOwner.getEmail(),
+                        restaurantOwner.getLogin(),
+                        restaurantOwner.getModifiedDate(),
+                        restaurantOwner.getAddress(),
+                        restaurantOwner.getRestaurantName()
+                )).toList();
+        }
+
+
+
 
 }
