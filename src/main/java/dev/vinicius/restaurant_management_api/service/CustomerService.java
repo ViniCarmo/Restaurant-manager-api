@@ -83,7 +83,7 @@ public class CustomerService {
         customerRepository.save(customer);
     }
     public List<CustomerResponseDto> findCustomerByName(String name){
-        return customerRepository.findCustomerByName(name).stream().map(customer -> new CustomerResponseDto(
+        return customerRepository.findByNameContainingIgnoreCase(name).stream().map(customer -> new CustomerResponseDto(
                 customer.getName(),
                 customer.getEmail(),
                 customer.getLogin(),

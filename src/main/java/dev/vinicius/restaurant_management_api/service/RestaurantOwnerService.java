@@ -55,7 +55,7 @@ public class RestaurantOwnerService {
     }
 
     public List<RestaurantOwnerResponseDto> getRestaurantOwnerByName(String name) {
-        return restaurantOwnerRepository.getRestaurantOwnerByName(name).stream()
+        return restaurantOwnerRepository.findByNameContainingIgnoreCase(name).stream()
                 .map(restaurantOwner -> new RestaurantOwnerResponseDto(
                         restaurantOwner.getName(),
                         restaurantOwner.getEmail(),

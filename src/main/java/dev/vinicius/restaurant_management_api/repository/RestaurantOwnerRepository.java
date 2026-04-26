@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface RestaurantOwnerRepository extends JpaRepository<RestaurantOwner, Integer> {
 
-    List<RestaurantOwner> getRestaurantOwnerByName(String name);
+    List<RestaurantOwner> findByNameContainingIgnoreCase(String name);
 }
