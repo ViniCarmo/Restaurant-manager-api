@@ -5,6 +5,7 @@ import dev.vinicius.restaurant_management_api.dto.CustomerResponseDto;
 import dev.vinicius.restaurant_management_api.dto.UpdatePasswordRequestDto;
 import dev.vinicius.restaurant_management_api.entities.Customer;
 import dev.vinicius.restaurant_management_api.repository.CustomerRepository;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -36,7 +37,7 @@ public class CustomerService {
 
     public CustomerResponseDto getCustomerById(Integer id) {
         Customer customer = customerRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Customer not found"));
+                .orElseThrow(() -> new EntityNotFoundException("Customer not found"));
         return new CustomerResponseDto(
                 customer.getName(),
                 customer.getEmail(),
@@ -48,14 +49,14 @@ public class CustomerService {
     }
 
     public void deleteCustomerById(Integer id) {
-        Customer customer = customerRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Customer not found"));
+       customerRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Customer not found"));
         customerRepository.deleteById(id);
     }
 
     public CustomerResponseDto updateCustomer(Integer id, CustomerRequestDto customerRequestDto) {
         Customer customer = customerRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Customer not found"));
+                .orElseThrow(() -> new EntityNotFoundException("Customer not found"));
 
         customer.setName(customerRequestDto.name());
         customer.setEmail(customerRequestDto.email());
@@ -76,7 +77,7 @@ public class CustomerService {
 
     public void updatePassword(Integer id, UpdatePasswordRequestDto dto) {
         Customer customer = customerRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Customer not found"));
+                .orElseThrow(() -> new EntityNotFoundException("Customer not found"));
         customer.setPassword(dto.newPassword());
         customer.setModifiedDate(LocalDateTime.now());
         customerRepository.save(customer);
