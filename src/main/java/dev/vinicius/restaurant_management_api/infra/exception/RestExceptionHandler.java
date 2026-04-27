@@ -1,4 +1,4 @@
-package dev.vinicius.restaurant_management_api.exception;
+package dev.vinicius.restaurant_management_api.infra.exception;
 
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.dao.DataIntegrityViolationException;
