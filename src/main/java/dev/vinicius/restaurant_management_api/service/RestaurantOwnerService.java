@@ -6,6 +6,7 @@ import dev.vinicius.restaurant_management_api.dto.UpdatePasswordRequestDto;
 import dev.vinicius.restaurant_management_api.entities.RestaurantOwner;
 import dev.vinicius.restaurant_management_api.repository.RestaurantOwnerRepository;
 import jakarta.persistence.EntityNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -15,9 +16,11 @@ import java.util.List;
 public class RestaurantOwnerService {
 
     private final RestaurantOwnerRepository restaurantOwnerRepository;
+    private final PasswordEncoder passwordEncoder;
 
-    public RestaurantOwnerService(RestaurantOwnerRepository restaurantOwnerRepository) {
+    public RestaurantOwnerService(RestaurantOwnerRepository restaurantOwnerRepository, PasswordEncoder passwordEncoder) {
         this.restaurantOwnerRepository = restaurantOwnerRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     public void createRestaurantOwner(RestaurantOwnerRequestDto restaurantOwnerRequestDto) {
@@ -26,7 +29,7 @@ public class RestaurantOwnerService {
                 restaurantOwnerRequestDto.name(),
                 restaurantOwnerRequestDto.email(),
                 restaurantOwnerRequestDto.login(),
-                restaurantOwnerRequestDto.password(),
+                passwordEncoder.encode(restaurantOwnerRequestDto.password()),
                 LocalDateTime.now(),
                 restaurantOwnerRequestDto.address(),
                 restaurantOwnerRequestDto.restaurantName()
@@ -91,7 +94,7 @@ public class RestaurantOwnerService {
      public void updatePassword(Integer id, UpdatePasswordRequestDto updatePasswordRequestDto) {
         RestaurantOwner restaurantOwner = restaurantOwnerRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Restaurant owner not found"));
-        restaurantOwner.setPassword(updatePasswordRequestDto.newPassword());
+        restaurantOwner.setPassword(passwordEncoder.encode(updatePasswordRequestDto.newPassword()));
         restaurantOwner.setModifiedDate(LocalDateTime.now());
         restaurantOwnerRepository.save(restaurantOwner);
     }

@@ -6,6 +6,7 @@ import dev.vinicius.restaurant_management_api.dto.UpdatePasswordRequestDto;
 import dev.vinicius.restaurant_management_api.entities.Customer;
 import dev.vinicius.restaurant_management_api.repository.CustomerRepository;
 import jakarta.persistence.EntityNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -16,9 +17,11 @@ import java.util.List;
 public class CustomerService {
 
     private final CustomerRepository customerRepository;
+    private final PasswordEncoder passwordEncoder;
 
-    public CustomerService(CustomerRepository customerRepository) {
+    public CustomerService(CustomerRepository customerRepository, PasswordEncoder passwordEncoder) {
         this.customerRepository = customerRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     public void createCustomer(CustomerRequestDto customerRequestDto) {
@@ -27,7 +30,7 @@ public class CustomerService {
                 customerRequestDto.name(),
                 customerRequestDto.email(),
                 customerRequestDto.login(),
-                customerRequestDto.password(),
+                passwordEncoder.encode(customerRequestDto.password()),
                 LocalDateTime.now(),
                 customerRequestDto.address(),
                 customerRequestDto.cpf()
@@ -78,7 +81,7 @@ public class CustomerService {
     public void updatePassword(Integer id, UpdatePasswordRequestDto dto) {
         Customer customer = customerRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Customer not found"));
-        customer.setPassword(dto.newPassword());
+        customer.setPassword(passwordEncoder.encode(dto.newPassword()));
         customer.setModifiedDate(LocalDateTime.now());
         customerRepository.save(customer);
     }
