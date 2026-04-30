@@ -1,4 +1,4 @@
 package dev.vinicius.restaurant_management_api.dto;
 
-public record LoginRequestDto(String email, String password) {
+public record LoginRequestDto(String emailOrLogin, String password) {
 }
