@@ -1,6 +1,5 @@
 package dev.vinicius.restaurant_management_api.infra.security.service;
 
-import dev.vinicius.restaurant_management_api.entities.User;
 import dev.vinicius.restaurant_management_api.repository.UserRepository;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
