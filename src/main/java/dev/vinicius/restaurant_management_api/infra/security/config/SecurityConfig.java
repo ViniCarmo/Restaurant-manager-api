@@ -1,4 +1,4 @@
-package dev.vinicius.restaurant_management_api.infra.config;
+package dev.vinicius.restaurant_management_api.infra.security.config;
 
 import dev.vinicius.restaurant_management_api.infra.security.filter.SecurityFilter;
 import dev.vinicius.restaurant_management_api.infra.security.service.UserDetailServiceImpl;
@@ -31,8 +31,9 @@ public class SecurityConfig {
         return http.cors(cors -> cors.disable())
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/auth/**", "/auth").permitAll()
+                        .requestMatchers("/api/v1/auth/**", "/api/v1/auth").permitAll()
                         .requestMatchers("/v3/api-docs/**", "/swagger-ui.html", "/swagger-ui/**").permitAll()
+                        .requestMatchers("/api/v1/restaurant-owners", "/api/v1/customers").permitAll()
                         .anyRequest().authenticated())
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();
