@@ -84,7 +84,9 @@ public class CustomerController {
     @Operation(summary = "Atualiza a senha de um cliente")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Senha atualizada com sucesso"),
-            @ApiResponse(responseCode = "404", description = "Cliente não encontrado")
+            @ApiResponse(responseCode = "404", description = "Cliente não encontrado"),
+            @ApiResponse(responseCode = "400", description = "Dados inválidos")
+
     })
     @SecurityRequirement(name = "bearer-key")
     @PutMapping("/{id}/password")
