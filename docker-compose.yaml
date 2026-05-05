@@ -1,0 +1,23 @@
+services:
+  db:
+    image: postgres:16
+    container_name: restaurant_management_db
+    environment:
+      POSTGRES_DB: restaurant_management_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: admin
+    ports:
+      - "5433:5432"
+
+  app:
+    build: .
+    container_name: restaurant_management_app
+    depends_on:
+      - db
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/restaurant_management_db
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: admin
+      JWT_secret_key: 12345678
+    ports:
+      - "8080:8080"
