@@ -1,0 +1,862 @@
+{
+  "info": {
+    "_postman_id": "55d8f666-02c9-418b-8f25-bdf24c26760e",
+    "name": "RestaurantManagement",
+    "description": "# 🚀 Get started here\n\nThis template guides you through CRUD operations (GET, POST, PUT, DELETE), variables, and tests.\n\n## 🔖 **How to use this template**\n\n#### **Step 1: Send requests**\n\nRESTful APIs allow you to perform CRUD operations using the POST, GET, PUT, and DELETE HTTP methods.\n\nThis collection contains each of these [request](https://learning.postman.com/docs/sending-requests/requests/) types. Open each request and click \"Send\" to see what happens.\n\n#### **Step 2: View responses**\n\nObserve the response tab for status code (200 OK), response time, and size.\n\n#### **Step 3: Send new Body data**\n\nUpdate or add new data in \"Body\" in the POST request. Typically, Body data is also used in PUT request.\n\n```\n{\n    \"name\": \"Add your name in the body\"\n}\n\n ```\n\n#### **Step 4: Update the variable**\n\nVariables enable you to store and reuse values in Postman. We have created a [variable](https://learning.postman.com/docs/sending-requests/variables/) called `base_url` with the sample request [https://postman-api-learner.glitch.me](https://postman-api-learner.glitch.me). Replace it with your API endpoint to customize this collection.\n\n#### **Step 5: Add tests in the \"Scripts\" tab**\n\nAdding tests to your requests can help you confirm that your API is working as expected. You can write test scripts in JavaScript and view the output in the \"Test Results\" tab.\n\n<img src=\"https://content.pstmn.io/fa30ea0a-373d-4545-a668-e7b283cca343/aW1hZ2UucG5n\" width=\"2162\" height=\"1530\">\n\n## 💪 Pro tips\n\n- Use folders to group related requests and organize the collection.\n    \n- Add more [scripts](https://learning.postman.com/docs/writing-scripts/intro-to-scripts/) to verify if the API works as expected and execute workflows.\n    \n\n## 💡Related templates\n\n[API testing basics](https://go.postman.co/redirect/workspace?type=personal&collectionTemplateId=e9a37a28-055b-49cd-8c7e-97494a21eb54&sourceTemplateId=ddb19591-3097-41cf-82af-c84273e56719)  \n[API documentation](https://go.postman.co/redirect/workspace?type=personal&collectionTemplateId=e9c28f47-1253-44af-a2f3-20dce4da1f18&sourceTemplateId=ddb19591-3097-41cf-82af-c84273e56719)  \n[Authorization methods](https://go.postman.co/redirect/workspace?type=personal&collectionTemplateId=31a9a6ed-4cdf-4ced-984c-d12c9aec1c27&sourceTemplateId=ddb19591-3097-41cf-82af-c84273e56719)",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Customer",
+      "item": [
+        {
+          "name": "postCustomers",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "64ce77a5-265d-4727-8a68-7b6cd8bc8a24",
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "id": "54e4373f-1129-420a-acee-a0753e38a795",
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "id": "27e88609-ad22-447a-9100-8e2d582d9d81",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"name\": \"Joao Teste\",\r\n  \"email\": \"João@email.com\",\r\n  \"login\": \"Joao\",\r\n  \"password\": \"123456\",\r\n  \"address\": \"Rua Teste, 123\",\r\n  \"cpf\": \"123.456.789-00\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "localhost:8080/api/v1/customers",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "v1",
+                "customers"
+              ]
+            },
+            "description": "This is a GET request and it is used to \"get\" data from an endpoint. There is no request body for a GET request, but you can use query parameters to help specify the resource you want data on (e.g., in this request, we have `id=1`).\n\nA successful GET response will have a `200 OK` status, and should include some kind of response body - for example, HTML web content or JSON data."
+          },
+          "response": []
+        },
+        {
+          "name": "postCustomers Invalido (Duplicado)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "64ce77a5-265d-4727-8a68-7b6cd8bc8a24",
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "id": "bf7e7fb7-c276-4f29-8e97-7da6b94c37a4",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"name\": \"Vinicius Teste\",\r\n  \"email\": \"vinicius@email.com\",\r\n  \"login\": \"vinicius\",\r\n  \"password\": \"123456\",\r\n  \"address\": \"Rua Teste, 123\",\r\n  \"cpf\": \"123.456.789-00\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "localhost:8080/api/v1/customers",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "v1",
+                "customers"
+              ]
+            },
+            "description": "This is a GET request and it is used to \"get\" data from an endpoint. There is no request body for a GET request, but you can use query parameters to help specify the resource you want data on (e.g., in this request, we have `id=1`).\n\nA successful GET response will have a `200 OK` status, and should include some kind of response body - for example, HTML web content or JSON data."
+          },
+          "response": []
+        },
+        {
+          "name": "postCustomers invalido (campo faltando)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "64ce77a5-265d-4727-8a68-7b6cd8bc8a24",
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "id": "097c86ac-e43b-4ad3-b245-6f5cd46b4a5a",
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "id": "7215fcc5-a1ac-4a44-9951-00d4c416846d",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{  \"name\": \"Pedro Teste\",  \r\n\"email\": \"Pedro@email.com\",  \r\n\"login\": \"Pedro\",  \r\n\"password\": \"123456\",  \r\n\"cpf\": \"123.456.789-00\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "localhost:8080/api/v1/customers",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "v1",
+                "customers"
+              ]
+            },
+            "description": "This is a GET request and it is used to \"get\" data from an endpoint. There is no request body for a GET request, but you can use query parameters to help specify the resource you want data on (e.g., in this request, we have `id=1`).\n\nA successful GET response will have a `200 OK` status, and should include some kind of response body - for example, HTML web content or JSON data."
+          },
+          "response": []
+        },
+        {
+          "name": "getCustomerById",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "9f62be05-e4b2-4607-878b-a0b27369bde7",
+                "exec": [
+                  "pm.test(\"Successful POST request\", function () {",
+                  "    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+                  "});",
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "id": "40dbf87d-3502-45d9-a2d6-051b7991cbff",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJyZXN0YXVyYW50LW1hbmFnZW1lbnQtYXBpIiwic3ViIjoidmluaWNpdXNAZW1haWwuY29tIiwiZXhwIjoxNzc3ODMxMjcwfQ.1T6rUw5lPJhOToXorSZ0gysMEgnDnbmznGbu7ak0yyE",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n\t\"name\": \"Add your name in the body\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "localhost:8080/api/v1/customers/1",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "v1",
+                "customers",
+                "1"
+              ]
+            },
+            "description": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code."
+          },
+          "response": []
+        },
+        {
+          "name": "getCustomerByName",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "f34536ca-fe50-44e6-86e8-4f5e4ca7e0bf",
+                "exec": [
+                  "pm.test(\"Successful PUT request\", function () {",
+                  "    pm.expect(pm.response.code).to.be.oneOf([200, 201, 204]);",
+                  "});",
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "id": "42070bf1-50ba-4709-900c-5cd330700166",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJyZXN0YXVyYW50LW1hbmFnZW1lbnQtYXBpIiwic3ViIjoidmluaWNpdXNAZW1haWwuY29tIiwiZXhwIjoxNzc4MDE0NjQwfQ.ZUNYs3R2KAFp2cQF8HJPtZ0NDtyK8pZqbViTaOXCoFo",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n\t\"name\": \"Add your name in the body\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "localhost:8080/api/v1/customers/name?name=Vinicius",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "v1",
+                "customers",
+                "name"
+              ],
+              "query": [
+                {
+                  "key": "name",
+                  "value": "Vinicius"
+                }
+              ]
+            },
+            "description": "This is a PUT request and it is used to overwrite an existing piece of data. For instance, after you create an entity with a POST request, you may want to modify that later. You can do that using a PUT request. You typically identify the entity being updated by including an identifier in the URL (eg. `id=1`).\n\nA successful PUT request typically returns a `200 OK`, `201 Created`, or `204 No Content` response code."
+          },
+          "response": []
+        },
+        {
+          "name": "deleteCustomer",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "448ec443-cd22-4596-bd17-0b0008ea8765",
+                "exec": [
+                  "pm.test(\"Successful DELETE request\", function () {",
+                  "    pm.expect(pm.response.code).to.be.oneOf([200, 202, 204]);",
+                  "});",
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "id": "79eac88c-13c8-4716-a8e4-62a7cdfc61a7",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJyZXN0YXVyYW50LW1hbmFnZW1lbnQtYXBpIiwic3ViIjoidmluaWNpdXNAZW1haWwuY29tIiwiZXhwIjoxNzc4MDE0NjQwfQ.ZUNYs3R2KAFp2cQF8HJPtZ0NDtyK8pZqbViTaOXCoFo",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"name\": \"João Silva\",\r\n  \"email\": \"joao.silva@email.com\",\r\n  \"login\": \"joaosilva\",\r\n  \"password\": \"123456\",\r\n  \"address\": \"Rua das Flores, 123\",\r\n  \"cpf\": \"123.456.789-00\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "localhost:8080/api/v1/customers/1",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "v1",
+                "customers",
+                "1"
+              ]
+            },
+            "description": "This is a DELETE request, and it is used to delete data that was previously created via a POST request. You typically identify the entity being updated by including an identifier in the URL (eg. `id=1`).\n\nA successful DELETE request typically returns a `200 OK`, `202 Accepted`, or `204 No Content` response code."
+          },
+          "response": []
+        },
+        {
+          "name": "updateCustomer",
+          "id": "a834fd12-9bd0-4682-875d-0853442b2114",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"name\": \"João Silva Atualizado\",\r\n  \"email\": \"joao.atualizado@email.com\",\r\n  \"login\": \"joaoatualizado\",\r\n  \"password\": \"123456\",\r\n  \"address\": \"Rua das Flores, 456\",\r\n  \"cpf\": \"123.456.789-00\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "localhost:8080/api/v1/customers/3",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "v1",
+                "customers",
+                "3"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "updateCustomer invalido (Id inexistente)",
+          "id": "5dc1a9c4-889f-4bd3-b05a-f7397dc80e46",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"name\": \"João Silva Atualizado\",\r\n  \"email\": \"joao.atualizado@email.com\",\r\n  \"login\": \"joaoatualizado\",\r\n  \"password\": \"123456\",\r\n  \"address\": \"Rua das Flores, 456\",\r\n  \"cpf\": \"123.456.789-00\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "localhost:8080/api/v1/customers/999",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "v1",
+                "customers",
+                "999"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "updatePasswordCustomer",
+          "id": "130d742f-971b-4f68-87df-caad0ba81214",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"newPassword\": \"novaSenha123\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "localhost:8080/api/v1/customers/1/password",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "v1",
+                "customers",
+                "1",
+                "password"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "updatePasswordCustomer Invalido (Id inexistente)",
+          "id": "1dc30298-8bff-4039-ac38-ae8a965e0561",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"newPassword\": \"novaSenha123\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "localhost:8080/api/v1/customers/999/password",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "v1",
+                "customers",
+                "999",
+                "password"
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "id": "5bb3c162-bb47-41c4-8463-fe5a2ab16fb3"
+    },
+    {
+      "name": "RestaurantOwner",
+      "item": [
+        {
+          "name": "postRestaurantOwner",
+          "id": "1948f0d4-6641-497c-83f1-82cc126dddf5",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"name\": \"Carlos Souza\",\r\n  \"email\": \"carlos@email.com\",\r\n  \"login\": \"carlos\",\r\n  \"password\": \"123456\",\r\n  \"address\": \"Av. Brasil, 750\",\r\n  \"restaurantName\": \"Cantina do Carlos\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "localhost:8080/api/v1/restaurant-owners",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "v1",
+                "restaurant-owners"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "postRestaurantOwner invalido (Duplicado)",
+          "id": "69f9d133-fb5b-4d25-9104-e1997623e341",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"name\": \"Ana Costa\",\r\n  \"email\": \"ana.costa@email.com\",\r\n  \"login\": \"anacosta\",\r\n  \"password\": \"123456\",\r\n  \"address\": \"Av. Brasil, 750\",\r\n  \"restaurantName\": \"Cantina da Ana\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "localhost:8080/api/v1/restaurant-owners",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "v1",
+                "restaurant-owners"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "postRestaurantOwner Invalido (Campo faltando)",
+          "id": "fbfe9fd4-ec69-4d7a-87f8-c5abd983ee8c",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"name\": \"Felipe\",\r\n  \"email\": \"felipe@email.com\",\r\n  \"login\": \"Felipe\",\r\n  \"address\": \"Av. Brasil, 750\",\r\n  \"restaurantName\": \"Cantina do felipe\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "localhost:8080/api/v1/restaurant-owners",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "v1",
+                "restaurant-owners"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "getRestaurantOwnerById",
+          "id": "047d58c4-b426-4864-967f-2bbd79a49032",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "localhost:8080/api/v1/restaurant-owners/3",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "v1",
+                "restaurant-owners",
+                "3"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "getRestaurantOwnerByName",
+          "id": "57c5386a-43d0-435d-9296-8e90a12a0a80",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "localhost:8080/api/v1/restaurant-owners/name?name=Carlos",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "v1",
+                "restaurant-owners",
+                "name"
+              ],
+              "query": [
+                {
+                  "key": "name",
+                  "value": "Carlos"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "deleteRestaurantOwner",
+          "id": "cb81e9cd-0c11-41df-bd89-c82dacb228bd",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "localhost:8080/api/v1/restaurant-owners/4",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "v1",
+                "restaurant-owners",
+                "4"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "updateRestaurantOwner",
+          "id": "46ab5199-d8b6-4109-991d-96016a47429b",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"name\": \"Carlos Oliveira Atualizado\",\r\n  \"email\": \"carlos.atualizado@email.com\",\r\n  \"login\": \"carlosatualizado\",\r\n  \"password\": \"123456\",\r\n  \"address\": \"Rua do Comércio, 300\",\r\n  \"restaurantName\": \"Restaurante do Carlos Premium\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "localhost:8080/api/v1/restaurant-owners/3",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "v1",
+                "restaurant-owners",
+                "3"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "updateRestaurantOwner Invalido (Id inexistente)",
+          "id": "1c2dca49-134e-43c7-8982-de09b52c5967",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"name\": \"Carlos Oliveira Atualizado\",\r\n  \"email\": \"carlos.atualizado@email.com\",\r\n  \"login\": \"carlosatualizado\",\r\n  \"password\": \"123456\",\r\n  \"address\": \"Rua do Comércio, 300\",\r\n  \"restaurantName\": \"Restaurante do Carlos Premium\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "localhost:8080/api/v1/restaurant-owners/997",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "v1",
+                "restaurant-owners",
+                "997"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "updatePasswordRestaurantOwner",
+          "id": "939665bc-65c8-41cc-b15f-fc87956d5a16",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"newPassword\": \"senhaCarlos456\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "localhost:8080/api/v1/restaurant-owners/3/password",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "v1",
+                "restaurant-owners",
+                "3",
+                "password"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "updatePasswordRestaurantOwner invalido (Id inexistente)",
+          "id": "388426a4-c60c-4c71-a23c-b21086edc8c6",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"newPassword\": \"senhaCarlos456\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "localhost:8080/api/v1/restaurant-owners/998/password",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "v1",
+                "restaurant-owners",
+                "998",
+                "password"
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "id": "36ff0ed5-392d-42fb-96b2-f7eb81e29f29"
+    },
+    {
+      "name": "auth",
+      "item": [
+        {
+          "name": "Login",
+          "id": "864f6c53-bcd4-4ce3-a159-26bb083172d8",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"emailOrLogin\": \"vinicius\",\r\n  \"password\": \"123456\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "localhost:8080/api/v1/auth",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "v1",
+                "auth"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Login Invalido (Senha invalida)",
+          "id": "7134c1b6-3457-4e91-b007-aba5faa1c55f",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"emailOrLogin\": \"vinicius\",\r\n  \"password\": \"12346\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "localhost:8080/api/v1/auth",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "v1",
+                "auth"
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "id": "5b681e23-ec79-4c18-ae75-f872ecca0f42"
+    }
+  ],
+  "variable": [
+    {
+      "id": "530bbdd9-38d3-441e-92dc-61f171c18dc2",
+      "key": "id",
+      "value": "1"
+    },
+    {
+      "id": "57b5ecc1-1ffd-4eb5-a9a4-fa78c5251c5d",
+      "key": "base_url",
+      "value": "https://template.postman-echo.com"
+    }
+  ]
+}
